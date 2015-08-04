@@ -3,9 +3,7 @@
 set -u
 set -e
 
-env
-
-cd /var/cache/drone/src/github.com/${owner}/${name}
+cd ${DRONE_BUILD_DIR}
 
 wrapdocker &
 sleep 5
