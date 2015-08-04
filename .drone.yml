@@ -3,3 +3,4 @@ env:
   - CONTAINER=ubuntu
 script:
   - .drone/build.sh
+  - .drone/tag.sh
