@@ -1,3 +1,5 @@
 image: build-worker:1.0.0
+env:
+  - CONTAINER=ubuntu
 script:
   - .drone/build.sh
