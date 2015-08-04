@@ -2,4 +2,4 @@
 
 # docker-ubuntu
 
-A container for testing drone.io
+A container for testing drone.io.
