@@ -1,3 +1,5 @@
 image: build-worker:1.0.0
+env:
+  - WORKDIR=$DRONE_BUILD_DIR
 script:
   - make container

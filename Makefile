@@ -1,10 +1,5 @@
 CONTAINER := ubuntu
-WORKDIR := .
-
-ifdef $$DRONE_BUILD_DIR
-WORKDIR := $$DRONE_BUILD_DIR
-endif
+WORKDIR ?= .
 
 container:
-	cd $(WORKDIR)
-	docker build -t $(CONTAINER) .
+	cd $(WORKDIR) && docker build -t $(CONTAINER) .
