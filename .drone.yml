@@ -1,4 +1,3 @@
 image: build-worker:1.0.0
 script:
   - .drone/build.sh
-  - .drone/test.sh
