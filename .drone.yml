@@ -1,3 +1,3 @@
-image: build-worker
+image: build-worker:1.0.0
 script:
   - make container
