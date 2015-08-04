@@ -3,6 +3,8 @@
 set -u
 set -e
 
+env
+
 cd /var/cache/drone/src/github.com/${owner}/${name}
 
 wrapdocker &
