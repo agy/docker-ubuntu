@@ -3,7 +3,7 @@
 set -u
 set -e
 
-env
+env | sort
 
 cd ${DRONE_BUILD_DIR}
 
