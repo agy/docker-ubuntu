@@ -1,8 +1,7 @@
-CONTAINER := ubuntu
+CONTAINER := base
+BRANCH := master
 
-container:
-	docker build -t $(CONTAINER) .
+container: build
 
-tag:
-	docker tag $(CONTAINER) $(CONTAINER):$(DRONE_BRANCH)
-	docker tag $(CONTAINER) $(CONTAINER):$(DRONE_COMMIT)
+build:
+	sudo ./build.sh $(CONTAINER) $(BRANCH)
