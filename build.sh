@@ -8,18 +8,27 @@ BRANCH=${2:-"master"}
 REF=${3:-$(git ls-remote --heads origin 2>/dev/null | awk '$2 ~/refs\/heads\/'${BRANCH}'/ { print $1 }')}
 
 TAG=$(git tag --points-at ${REF} 2>/dev/null | head --lines 1)
+URL=$(git remote get-url origin 2>/dev/null | head --lines 1)
 
-LAST_UPDATED=$(date "+%s")
+LAST_UPDATED=$(TZ="UTC" date --rfc-3339="seconds")
 SUDO="sudo"
 
 
 # Build a container based on the current remote git ref
 build() {
+	local tmp_dir=$(mktemp --directory)
+	pushd ${tmp_dir}
+	git clone ${URL} .
+
 	${SUDO} docker build \
-		--no-cache \
-		--label="com.datadoghq.updated"=${LAST_UPDATED} \
+		--label="com.datadoghq.build-date"="${LAST_UPDATED}" \
+		--label="com.datadoghq.vcs-url"="${URL}" \
+		--label="com.datadoghq.vcs-ref"="${REF}" \
 		--tag ${CONTAINER}:${REF} \
 		.
+
+	popd
+	rm -rf ${tmp_dir} || true
 }
 
 # Tag a container based on the current tag pointing at the current git ref
