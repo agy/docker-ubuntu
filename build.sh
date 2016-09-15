@@ -39,7 +39,7 @@ tag() {
 
 image_has_ref() {
 	if ${SUDO} docker images --quiet ${CONTAINER}:${REF} | \
-		grep --quiet '^[a-f0-8]{12}'; then
+		grep --quiet --extended-regexp '^[0-9a-f]{12}'; then
 		return 0
 	fi
 	return 1
