@@ -19,3 +19,7 @@ This results in a Docker image built and tagged with:
 ## Caveats
 
  * Only the first git tag is used to tag the Docker image
+
+## TODO
+
+ * Attempt a pull if the image name includes registry information
