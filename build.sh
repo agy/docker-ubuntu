@@ -40,8 +40,8 @@ tag() {
 image_has_ref() {
 	${SUDO} docker images --quiet ${CONTAINER}:${REF} | \
 		grep --quiet '^[a-f0-8]{12}' && \
-		return 0
-	return 1
+		return 1
+	return 0
 }
 
 main() {
