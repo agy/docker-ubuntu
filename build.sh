@@ -21,6 +21,7 @@ build() {
 	git clone ${URL} .
 
 	${SUDO} docker build \
+		--no-cache \
 		--label="com.datadoghq.build-date"="${LAST_UPDATED}" \
 		--label="com.datadoghq.vcs-url"="${URL}" \
 		--label="com.datadoghq.vcs-ref"="${REF}" \
