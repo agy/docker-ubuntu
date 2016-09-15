@@ -1,3 +1,11 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
-CMD ["/bin/bash", "-l"]
+ADD ./etc /etc
+
+RUN apt-get update && \
+    apt-get dist-upgrade --yes && \
+    DEBIAN_FRONTEND=noninteractive \
+        apt-get install --yes \
+            apt-transport-https \
+            ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
