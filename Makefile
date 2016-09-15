@@ -4,4 +4,4 @@ BRANCH := master
 container: build
 
 build:
-	sudo ./build.sh $(CONTAINER) $(BRANCH)
+	./build.sh $(CONTAINER) $(BRANCH)
