@@ -34,10 +34,15 @@ build() {
 	local container=${1}
 	local git_url=${2}
 	local git_ref=${3}
+	local old_dir=${4}
 
 	local last_updated=$(TZ="UTC" date --rfc-3339="seconds")
 
 	git clone ${git_url} .
+	[ -d "${old_dir}/artifacts" ] && \
+		[ ! -e "artifacts" ] && \
+		cp -rp ${old_dir}/artifacts .
+
 	sudo docker build \
 		--no-cache \
 		--label="com.datadoghq.build-date"="${last_updated}" \
@@ -106,8 +111,9 @@ main() {
 		exit 0
 	fi
 
+	local old_dir=$(pwd)
 	pushd ${TMP_DIR}
-	build ${CONTAINER} ${GIT_URL} ${git_ref}
+	build ${CONTAINER} ${GIT_URL} ${git_ref} ${old_dir}
 	popd
 
 	tag ${CONTAINER} ${git_ref} ${git_tag}
